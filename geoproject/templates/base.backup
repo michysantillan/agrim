@@ -1,0 +1,92 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+
+{% block html %}
+<html lang="en">
+
+    {% block head %}
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+        {% block title %}{% endblock %}
+
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">        
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        {% block extra_css %}{% endblock %}
+    </head>
+    
+     <body id="{% block page_id %}{% endblock page_id %}" class="{% block body_class %}{% endblock body_class %}" {% block body_attrs %}{% endblock body_attrs %}>
+    {% block body %}
+        {% block navbar %}
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar navbar-light bg-light" href="{% url 'home' %}">
+            <img src="static/images/logo3.png" class="d-inline-block align-top" alt="">
+            </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <img src="static/images/logo3.png" class="d-inline-block align-top" alt="">
+
+            {% url 'place-list' as place_url %}
+            {% url 'area-list' as area_url %}
+            {% url 'route-list' as route_url %}
+              <!--<li {% if request.path == place_url %} class="disable" {% endif %}><a href="{% url 'place-list' %}">Lugares<span class="sr-only">(current)</span></a></li>-->
+              <li {% if request.path == area_url %} class="active" {% endif %}><a href="{% url 'area-list' %}">Area<span class="sr-only">(current)</span></a></li>
+            <!--<li {% if request.path == route_url %} class="active" {% endif %}><a href="{% url 'route-list' %}">Ruta<span class="sr-only">(current)</span></a></li>-->
+            {% if user.is_authenticated %}
+            <li>
+              <a href="#">Usuario: {{user.username}}</a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}">Cerrar Sesión</a>
+            </li>
+            {%else%}
+            <li>
+              <a href="{% url 'login' %}">Iniciar Sesión</a>
+            </li>
+             {%endif%}
+          </ul>
+       </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    {% endblock navbar %}
+
+        <div class="mt-5"></div>
+
+        {% block navbar_after %}{% endblock %}
+
+        {% block body_content %}
+            <div class="container">
+                {% block container %}{% endblock %}
+            </div>
+        {% endblock %}
+
+        {% block foot %}
+            <footer>
+                {% block footer %}{% endblock %}
+            </footer>
+        {% endblock %}
+
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/popper.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/js.cookie.js' %}"></script>
+        <script src="{% static 'js/csrf.js' %}"></script>
+        {% block extra_js %}{% endblock %}
+
+    </body>
+    {% endblock %}
+
+</html>
+{% endblock %}

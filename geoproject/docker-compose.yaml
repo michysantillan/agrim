@@ -1,0 +1,41 @@
+version: "3"
+
+services: 
+    db_postgres:
+        image: mdillon/postgis:9.6
+        container_name: postgis
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        ports:
+            - 5432:5432            
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: postgres
+            POSTGRES_DB: catagis
+            
+    django_app:
+        build: .
+        volumes:
+            - static:/code/static
+            - .:/code
+        depends_on:
+            - db_postgres
+        container_name: app
+
+    nginx:
+        image: nginx:1.16-alpine
+        ports:
+            - 80:80
+        volumes:
+            - ./config/nginx/conf.d:/etc/nginx/conf.d
+            - static:/code/static
+        depends_on:
+            - django_app
+        container_name: nginx
+
+volumes:
+    .:
+    postgres_data:
+    static:
+
+

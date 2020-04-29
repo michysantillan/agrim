@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load cms %}
+
+
+{% block content %}
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 style="text-align:center;">{% create_title model  'Lista' %}</h1>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <a class="btn btn-primary pull-right" href="{% url_create model 'create' %}"><i class="fa fa-plus" aria-hidden="true"></i>
+{% add_title model 'Agregar' %}</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Usuario</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        
+          {% for object in object_list %}
+          <tr>
+            <td>{{object.pk}}</td>
+            <td>{{object.name}}</td>
+            <td>{{object.user}}</td>
+            <td>
+              <a class="btn btn-warning" href="{% url_update object 'update' %}">Actualizar <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+              <a class="btn btn-danger" href="{% url_delete object 'delete' %}">Borrar <i class="fa fa-times" aria-hidden="true"></i></a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="3" style="text-align:center;">Lista Vacia</td>
+          </tr>
+          {% endfor %}
+        
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+{% endblock %}
