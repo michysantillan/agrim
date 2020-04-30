@@ -89,7 +89,7 @@ DATABASES = {
     'NAME': 'gis', 
     'USER': 'postgres', 
     'PASSWORD': 'postgres', 
-    'HOST': 'gis', 
+    'HOST': 'db_postgres', 
     'PORT': '5432', 
   } 
 }
