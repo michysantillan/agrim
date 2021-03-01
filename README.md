@@ -13,7 +13,7 @@ Para comenzar, debes clonar el proyecto con
 
 ### Requerimientos 📋
 ```
-Django==2.0.7
+Django==2.2.13
 psycopg2-binary==2.7.5
 pytz==2018.5
 ```
