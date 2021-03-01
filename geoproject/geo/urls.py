@@ -16,13 +16,3 @@ urlpatterns = [
     
       
 ]
-'''
-
-    path('create/', PlaceCreate.as_view(), name='place-create'),
-    path('update/<int:pk>', PlaceUpdate.as_view(), name='place-update'),
-    path('delete/<int:pk>', PlaceDelete.as_view(), name='place-delete'),
-    path('route/', RouteListView.as_view(), name='route-list'),
-    path('route/create/', RouteCreate.as_view(), name='route-create'),
-    path('route/update/<int:pk>', RouteUpdate.as_view(), name='route-update'),
-    path('route/delete/<int:pk>', RouteDelete.as_view(), name='route-delete')
-    '''
